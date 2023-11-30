@@ -1,0 +1,50 @@
+<div class="table-container">
+
+    <table>
+  
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Póster</th>
+          <th>Nombre</th>
+          <th>Status</th>
+          <th>Género</th>
+          <th>Cine</th>
+          <th>Ubicación</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+
+        </tr>
+      </thead>
+  
+      <tbody>
+  
+        <tr *ngFor="let movie of listadoMovies" (click)="movieSeleccionada = movie">
+          <td> <strong>{{ movie.id }}</strong> </td>
+          <td> <img [src]="rutaImagen + movie.imagen" [alt]="movie.id"> </td>
+          <td>{{ movie.nombre }}</td>
+          <td> <span class="tag">{{ movie.estatus }}</span> </td>
+          <td>{{ movie.genero }}</td>
+          <td>{{ movie.cine }}</td>
+          <td>{{ movie.ubicacion }}</td>
+          <td>{{ movie.descripcion }}</td>
+          <td>{{ movie.precioVenta | currency }}</td>
+        </tr>
+  
+      </tbody>
+  
+    </table>
+  
+  </div>
+  
+  <div class="message" *ngIf="listadoMovies.length === 0">
+    <p>{{ cargandoMovies ? 'Cargando...' : 'No se encontraron registros...'}}</p>
+  </div>
+  
+  
+  <app-detalle-movie *ngIf="movieSeleccionada !== null"
+    [movie]="movieSeleccionada"
+    (close)="movieSeleccionada = null">
+  
+  </app-detalle-movie>
+  
